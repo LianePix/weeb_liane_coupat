@@ -13,7 +13,7 @@ export default function AnimatedSquare() {
       className="hidden sm:block sm:w-[200px] md:w-[500px] h-auto mr-10"
     >
       <img
-        src="/images/Shapes.png"
+        src="/images/Shapes.webp"
         alt="Animated Square"
       />
     </motion.div>

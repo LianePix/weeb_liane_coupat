@@ -21,7 +21,7 @@ export default function Home() {
         buttonText="Explorer les ressources"
         buttonLink="/method"
         imageLeft
-        imageSrc="/images/Desktop-ban.png"
+        imageSrc="/images/Desktop-ban.webp"
         imageAlt="Méthode"
       />
       <BanText

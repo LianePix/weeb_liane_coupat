@@ -13,7 +13,7 @@ export default function Hero() {
             S'abonner à la newsletter
           </Button>
         </div>
-      <img src="/images/Desktop-hero.png" alt="Shapes" className="hidden sm:block md:block w-[1100px] h-auto mx-auto my-20" />  
+      <img src="/images/Desktop-hero.webp" alt="Shapes" className="hidden sm:block md:block w-[1100px] h-auto mx-auto my-20" />  
     </div>
   )
 }
