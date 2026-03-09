@@ -1,15 +1,20 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { apiGet } from "../services/api";
+import { apiPostAuth } from "../services/api";
 
 export default function ArticlesList() {
   const [data, setData] = useState(null);     
   const [error, setError] = useState("");
   const [page, setPage] = useState(1);
 
-  // états UI du filtre
+  // états UI du filtre + création d'article
   const [q, setQ] = useState("");
   const [ordering, setOrdering] = useState("-created_at");
+  const [showForm, setShowForm] = useState(false);
+  const [newPost, setNewPost] = useState({ title: "", excerpt: "", content: "", is_published: true });
+  const isLoggedIn = Boolean(localStorage.getItem("access_token"));
+
 
   // query pr l'API
   const query = useMemo(() => {
@@ -46,6 +51,39 @@ export default function ArticlesList() {
   return (
     <div className="w-full px-6 max-w-[1000px] mx-auto py-10">
       <h1>Articles</h1>
+
+      {isLoggedIn && (
+        <div className="mt-4">
+          <button
+            onClick={() => setShowForm((v) => !v)}
+            className="px-4 py-2 rounded border border-white/20 hover:bg-white/10"
+          >
+            {showForm ? "Annuler" : "+ Créer un article"}
+          </button>
+          {showForm && (
+            <form className="mt-4 space-y-3" onSubmit={async (e) => {
+              e.preventDefault();
+              try {
+                await apiPostAuth("/api/posts/", newPost);
+                setShowForm(false);
+                setNewPost({ title: "", excerpt: "", content: "", is_published: true });
+                setPage(1);
+              } catch (err) { setError(err.message); }
+            }}>
+              {["title", "excerpt", "content"].map((field) => (
+                <input key={field} placeholder={field} value={newPost[field]}
+                  onChange={(e) => setNewPost({ ...newPost, [field]: e.target.value })}
+                  className="w-full px-3 py-2 rounded border border-white/20 bg-white/5"
+                />
+              ))}
+              <button type="submit" className="px-4 py-2 rounded bg-secondary hover:bg-tertiary">
+                Publier
+              </button>
+            </form>
+          )}
+        </div>
+      )}
+
 
       {/* Barre de filtres */}
       <form onSubmit={applyFilters} className="mt-6 flex flex-wrap items-end gap-3">

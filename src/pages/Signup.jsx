@@ -14,8 +14,14 @@ export default function Signup() {
       await apiPost("/api/users/create/", form);
       setSuccess(true);
     } catch (err) {
-      setError(err.message);
+      try {
+        const text = err.message.replace(/^POST .* failed: \d+ /, "");
+        setError(JSON.parse(text));
+      } catch {
+        setError({ erreur: [err.message] });
+      }
     }
+
   }
 
   if (success) return (
@@ -29,7 +35,13 @@ export default function Signup() {
   return (
     <div className="flex flex-col items-center w-full mx-auto max-w-[880px] gap-8 py-16 px-4 text-center">
       <h1>Créer un compte</h1>
-      {error && <p className="text-red-400">{error}</p>}
+      {error && (
+        <div className="text-red-400 text-sm space-y-1">
+            {Object.entries(error).map(([field, messages]) => (
+            <p key={field}><strong>{field} :</strong> {messages.join(" ")}</p>
+            ))}
+        </div>
+        )}
       <form className="space-y-10" onSubmit={handleSubmit}>
         {["email", "first_name", "last_name", "password"].map((field) => (
           <div key={field}>
