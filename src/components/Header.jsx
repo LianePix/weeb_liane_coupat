@@ -26,10 +26,21 @@ export default function Header() {
 
         {/* log in + join now */}
         <div className="hidden md:flex items-center gap-10">
-          <Link to="/login" className="text-white hover:text-tertiary">Log In</Link>
-          <Button to="/" className="text-[16px] py-[6px] px-[32px] hover:bg-tertiary hover:border-tertiary">
-            Join Now
-          </Button>
+          {localStorage.getItem("access_token") ? (
+            <button
+              onClick={() => { localStorage.removeItem("access_token"); localStorage.removeItem("refresh_token"); window.location.href = "/"; }}
+              className="text-white hover:text-tertiary"
+            >
+              Log Out
+            </button>
+          ) : (
+            <>
+              <Link to="/login" className="text-white hover:text-tertiary">Log In</Link>
+              <Button to="/signup" className="text-[16px] py-[6px] px-[32px] hover:bg-tertiary hover:border-tertiary">
+                Join Now
+              </Button>
+            </>
+          )}
         </div>
 
         {/* Burger icone */}
@@ -45,10 +56,17 @@ export default function Header() {
         <div className="absolute top-[100%] left-0 w-full bg-[#0f1729e6] backdrop-blur-lg shadow-lg px-6 py-8 flex flex-col border-b gap-4 md:hidden">
           <Link to="/" className="text-white hover:text-tertiary" onClick={() => setIsOpen(false)}>About us</Link>
           <Link to="/contact" className="text-white hover:text-tertiary" onClick={() => setIsOpen(false)}>Contact</Link>
-          <Link to="/login" className="text-white hover:text-tertiary" onClick={() => setIsOpen(false)}>Log In</Link>
-          <Button to="/" className="w-full text-[16px] py-[10px] hover:bg-tertiary hover:border-tertiary">
-            Join Now
-          </Button>
+          {localStorage.getItem("access_token") ? (
+          <button onClick={() => { localStorage.removeItem("access_token"); localStorage.removeItem("refresh_token"); window.location.href = "/"; }} className="text-white hover:text-tertiary text-left">
+            Log Out
+          </button>
+          ) : (
+            <>
+              <Link to="/login" className="text-white hover:text-tertiary" onClick={() => setIsOpen(false)}>Log In</Link>
+              <Button to="/signup" className="w-full text-[16px] py-[10px] hover:bg-tertiary hover:border-tertiary">Join Now</Button>
+            </>
+          )}
+
         </div>
       )}
     </header>

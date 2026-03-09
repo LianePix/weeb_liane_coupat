@@ -68,14 +68,23 @@ export default function ArticlesList() {
                 setShowForm(false);
                 setNewPost({ title: "", excerpt: "", content: "", is_published: true });
                 setPage(1);
+                apiGet(`/api/posts/?page=1&ordering=${ordering}`).then(setData);
               } catch (err) { setError(err.message); }
             }}>
-              {["title", "excerpt", "content"].map((field) => (
-                <input key={field} placeholder={field} value={newPost[field]}
-                  onChange={(e) => setNewPost({ ...newPost, [field]: e.target.value })}
+              {[
+                { key: "title", label: "Titre" },
+                { key: "excerpt", label: "Résumé (optionnel)" },
+              ].map(({ key, label }) => (
+                <input key={key} placeholder={label} value={newPost[key]}
+                  onChange={(e) => setNewPost({ ...newPost, [key]: e.target.value })}
                   className="w-full px-3 py-2 rounded border border-white/20 bg-white/5"
                 />
               ))}
+              <textarea placeholder="Contenu" value={newPost.content}
+                onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
+                rows={6}
+                className="w-full px-3 py-2 rounded border border-white/20 bg-white/5 resize-y"
+              />
               <button type="submit" className="px-4 py-2 rounded bg-secondary hover:bg-tertiary">
                 Publier
               </button>
