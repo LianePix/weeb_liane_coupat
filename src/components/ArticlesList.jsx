@@ -56,7 +56,7 @@ export default function ArticlesList() {
         <div className="mt-4">
           <button
             onClick={() => setShowForm((v) => !v)}
-            className="px-4 py-2 rounded border border-white/20 hover:bg-white/10"
+            className="px-4 py-2 rounded-2xl border border-white/20 hover:bg-white/10"
           >
             {showForm ? "Annuler" : "+ Créer un article"}
           </button>
@@ -77,15 +77,15 @@ export default function ArticlesList() {
               ].map(({ key, label }) => (
                 <input key={key} placeholder={label} value={newPost[key]}
                   onChange={(e) => setNewPost({ ...newPost, [key]: e.target.value })}
-                  className="w-full px-3 py-2 rounded border border-white/20 bg-white/5"
+                  className="w-full px-3 py-2 rounded-2xl border border-white/20 bg-white/5"
                 />
               ))}
               <textarea placeholder="Contenu" value={newPost.content}
                 onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
                 rows={6}
-                className="w-full px-3 py-2 rounded border border-white/20 bg-white/5 resize-y"
+                className="w-full px-3 py-2 rounded-2xl border border-white/20 bg-white/5 resize-y"
               />
-              <button type="submit" className="px-4 py-2 rounded bg-secondary hover:bg-tertiary">
+              <button type="submit" className="px-4 py-2 rounded-2xl bg-secondary hover:bg-tertiary">
                 Publier
               </button>
             </form>
@@ -103,7 +103,7 @@ export default function ArticlesList() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Titre, contenu, auteur…"
-            className="w-full px-3 py-2 rounded border border-white/20 bg-white/5"
+            className="w-full px-3 py-2 rounded-2xl border border-white/20 bg-white/5"
           />
         </div>
 
@@ -114,7 +114,7 @@ export default function ArticlesList() {
               type="button"
               onClick={() => { setOrdering("-created_at"); setPage(1); }}
               aria-pressed={ordering === "-created_at"}
-              className={`h-12 px-3 rounded border transition
+              className={`h-12 px-3 rounded-2xl border transition
                 ${ordering === "-created_at"
                   ? "bg-white/15 border-white/30"
                   : "bg-white/5 border-white/20 hover:bg-white/10"}`}
@@ -127,7 +127,7 @@ export default function ArticlesList() {
               type="button"
               onClick={() => { setOrdering("created_at"); setPage(1); }}
               aria-pressed={ordering === "created_at"}
-              className={`h-12 px-3 rounded border transition
+              className={`h-12 px-3 rounded-2xl border transition
                 ${ordering === "created_at"
                   ? "bg-white/15 border-white/30"
                   : "bg-white/5 border-white/20 hover:bg-white/10"}`}
@@ -141,14 +141,14 @@ export default function ArticlesList() {
         <div className="flex gap-2">
           <button
             type="submit"
-            className="h-12 px-4 py-2 rounded border border-white/20 hover:bg-white/10"
+            className="h-12 px-4 py-2 rounded-2xl border border-white/20 hover:bg-white/10"
           >
             Filtrer
           </button>
           <button
             type="button"
             onClick={resetFilters}
-            className="h-12 px-4 py-2 rounded border border-white/20 hover:bg-white/10"
+            className="h-12 px-4 py-2 rounded-2xl border border-white/20 hover:bg-white/10"
           >
             Réinitialiser
           </button>
@@ -192,7 +192,7 @@ export default function ArticlesList() {
             <button
               onClick={() => setPage((n) => Math.max(1, n - 1))}
               disabled={!hasPrev}
-              className="px-3 py-2 rounded border border-white/20 disabled:opacity-50"
+              className="px-3 py-2 rounded-2xl border border-white/20 disabled:opacity-50"
             >
               ← Précédent
             </button>
@@ -200,7 +200,7 @@ export default function ArticlesList() {
             <button
               onClick={() => setPage((n) => n + 1)}
               disabled={!hasNext}
-              className="px-3 py-2 rounded border border-white/20 disabled:opacity-50"
+              className="px-3 py-2 rounded-2xl border border-white/20 disabled:opacity-50"
             >
               Suivant →
             </button>

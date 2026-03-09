@@ -58,15 +58,15 @@ export default function ArticleDetailView() {
           {editing ? (
             <div className="space-y-4">
               <input value={editForm.title} onChange={(e) => setEditForm({ ...editForm, title: e.target.value })}
-                className="w-full px-3 py-2 rounded border border-white/20 bg-white/5 text-2xl font-bold" />
+                className="w-full px-3 py-2 rounded-2xl border border-white/20 bg-white/5 text-2xl font-bold" />
               <input value={editForm.excerpt} onChange={(e) => setEditForm({ ...editForm, excerpt: e.target.value })}
                 placeholder="Résumé (optionnel)"
-                className="w-full px-3 py-2 rounded border border-white/20 bg-white/5" />
+                className="w-full px-3 py-2 rounded-2xl border border-white/20 bg-white/5" />
               <textarea value={editForm.content} onChange={(e) => setEditForm({ ...editForm, content: e.target.value })}
-                rows={10} className="w-full px-3 py-2 rounded border border-white/20 bg-white/5 resize-y" />
+                rows={10} className="w-full px-3 py-2 rounded-2xl border border-white/20 bg-white/5 resize-y" />
               <div className="flex gap-3">
-                <button onClick={handleSave} className="px-4 py-2 rounded bg-secondary hover:bg-tertiary">Enregistrer</button>
-                <button onClick={() => setEditing(false)} className="px-4 py-2 rounded border border-white/20 hover:bg-white/10">Annuler</button>
+                <button onClick={handleSave} className="px-4 py-2 rounded-2xl bg-secondary hover:bg-tertiary">Enregistrer</button>
+                <button onClick={() => setEditing(false)} className="px-4 py-2 rounded-2xl border border-white/20 hover:bg-white/10">Annuler</button>
               </div>
             </div>
           ) : (
@@ -78,8 +78,8 @@ export default function ArticleDetailView() {
               </div>
               {isAuthor && (
                 <div className="flex gap-3 mb-8">
-                  <button onClick={() => setEditing(true)} className="px-4 py-2 rounded border border-white/20 hover:bg-white/10 text-sm">Modifier</button>
-                  <button onClick={handleDelete} className="px-4 py-2 rounded border border-red-400/40 text-red-400 hover:bg-red-600/20 text-sm">Supprimer</button>
+                  <button onClick={() => setEditing(true)} className="px-4 py-2 rounded-2xl border border-white/20 hover:bg-white/10 text-sm">Modifier</button>
+                  <button onClick={handleDelete} className="px-4 py-2 rounded-2xl border border-red-400/40 text-red-400 hover:bg-red-600/20 text-sm">Supprimer</button>
                 </div>
               )}
               <p className="opacity-90 whitespace-pre-wrap">{post.content}</p>
