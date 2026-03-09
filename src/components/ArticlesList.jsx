@@ -56,7 +56,7 @@ export default function ArticlesList() {
         <div className="mt-4">
           <button
             onClick={() => setShowForm((v) => !v)}
-            className="px-4 py-2 rounded-2xl border border-white/20 hover:bg-white/10"
+            className="px-4 py-2 rounded-xl border border-white/20 hover:bg-white/10"
           >
             {showForm ? "Annuler" : "+ Créer un article"}
           </button>
@@ -77,15 +77,15 @@ export default function ArticlesList() {
               ].map(({ key, label }) => (
                 <input key={key} placeholder={label} value={newPost[key]}
                   onChange={(e) => setNewPost({ ...newPost, [key]: e.target.value })}
-                  className="w-full px-3 py-2 rounded-2xl border border-white/20 bg-white/5"
+                  className="w-full px-3 py-2 rounded-xl border border-white/20 bg-white/5"
                 />
               ))}
               <textarea placeholder="Contenu" value={newPost.content}
                 onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
                 rows={6}
-                className="w-full px-3 py-2 rounded-2xl border border-white/20 bg-white/5 resize-y"
+                className="w-full px-3 py-2 rounded-xl border border-white/20 bg-white/5 resize-y"
               />
-              <button type="submit" className="px-4 py-2 rounded-2xl bg-secondary hover:bg-tertiary">
+              <button type="submit" className="px-4 py-2 rounded-xl bg-secondary hover:bg-tertiary">
                 Publier
               </button>
             </form>
@@ -107,9 +107,9 @@ export default function ArticlesList() {
           />
         </div>
 
-        <div className="min-w-[260px]">
+        <div>
           <label className="block text-sm opacity-80 mb-1">Tri</label>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <button
               type="button"
               onClick={() => { setOrdering("-created_at"); setPage(1); }}
@@ -184,7 +184,7 @@ export default function ArticlesList() {
             <button
               onClick={() => setPage((n) => Math.max(1, n - 1))}
               disabled={!hasPrev}
-              className="px-3 py-2 rounded-2xl border border-white/20 disabled:opacity-50"
+              className="px-3 py-2 rounded-xl border border-white/20 disabled:opacity-50"
             >
               ← Précédent
             </button>
@@ -192,7 +192,7 @@ export default function ArticlesList() {
             <button
               onClick={() => setPage((n) => n + 1)}
               disabled={!hasNext}
-              className="px-3 py-2 rounded-2xl border border-white/20 disabled:opacity-50"
+              className="px-3 py-2 rounded-xl border border-white/20 disabled:opacity-50"
             >
               Suivant →
             </button>

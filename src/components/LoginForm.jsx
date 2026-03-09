@@ -32,7 +32,7 @@ export default function LoginForm() {
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full text-center text-secondary placeholder-secondary px-4 py-2 bg-transparent border-b border-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:placeholder-transparent focus:border-secondary transition"/>
+            className="w-full text-center text-secondary placeholder-secondary px-4 py-2 bg-transparent border-b border-secondary rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary focus:placeholder-transparent focus:border-secondary transition"/>
         </div>
         <div>
           <input
@@ -40,7 +40,7 @@ export default function LoginForm() {
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            className="w-full text-center text-secondary placeholder-secondary px-4 py-2 bg-transparent border-b border-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:placeholder-transparent focus:border-secondary transition"/>
+            className="w-full text-center text-secondary placeholder-secondary px-4 py-2 bg-transparent border-b border-secondary rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary focus:placeholder-transparent focus:border-secondary transition"/>
         </div>
         <div className="text-center">
           <button type="submit" className="bg-secondary hover:bg-tertiary font-medium px-10 py-4 rounded-[8px]">

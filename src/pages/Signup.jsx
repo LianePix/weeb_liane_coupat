@@ -50,7 +50,7 @@ export default function Signup() {
               placeholder={field.replace("_", " ")}
               value={form[field]}
               onChange={(e) => setForm({ ...form, [field]: e.target.value })}
-              className="w-full text-center text-secondary placeholder-secondary px-4 py-2 bg-transparent border-b border-secondary focus:outline-none focus:ring-2 focus:ring-secondary focus:placeholder-transparent transition"
+              className="w-full text-center text-secondary placeholder-secondary px-4 py-2 bg-transparent border-b border-secondary rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary focus:placeholder-transparent transition"
             />
           </div>
         ))}
