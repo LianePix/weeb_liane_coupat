@@ -103,7 +103,7 @@ export default function ArticlesList() {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="Titre, contenu, auteur…"
-            className="w-full px-3 py-2 rounded-2xl border border-white/20 bg-white/5"
+            className="w-full px-3 py-2 rounded-xl border border-white/20 bg-white/5"
           />
         </div>
 
@@ -114,7 +114,7 @@ export default function ArticlesList() {
               type="button"
               onClick={() => { setOrdering("-created_at"); setPage(1); }}
               aria-pressed={ordering === "-created_at"}
-              className={`h-12 px-3 rounded-2xl border transition
+              className={`h-12 px-3 rounded-xl border transition
                 ${ordering === "-created_at"
                   ? "bg-white/15 border-white/30"
                   : "bg-white/5 border-white/20 hover:bg-white/10"}`}
@@ -127,7 +127,7 @@ export default function ArticlesList() {
               type="button"
               onClick={() => { setOrdering("created_at"); setPage(1); }}
               aria-pressed={ordering === "created_at"}
-              className={`h-12 px-3 rounded-2xl border transition
+              className={`h-12 px-3 rounded-xl border transition
                 ${ordering === "created_at"
                   ? "bg-white/15 border-white/30"
                   : "bg-white/5 border-white/20 hover:bg-white/10"}`}
@@ -138,21 +138,13 @@ export default function ArticlesList() {
           </div>
         </div>
 
-        <div className="flex gap-2">
-          <button
-            type="submit"
-            className="h-12 px-4 py-2 rounded-2xl border border-white/20 hover:bg-white/10"
-          >
-            Filtrer
-          </button>
-          <button
-            type="button"
-            onClick={resetFilters}
-            className="h-12 px-4 py-2 rounded-2xl border border-white/20 hover:bg-white/10"
-          >
-            Réinitialiser
-          </button>
-        </div>
+        <button
+          type="button"
+          onClick={resetFilters}
+          className="h-12 px-4 py-2 rounded-xl border border-white/20 hover:bg-white/10"
+        >
+          Réinitialiser
+        </button>
       </form>
 
       {error && (
