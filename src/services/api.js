@@ -1,5 +1,27 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || "http://127.0.0.1:8000";
 
+async function refreshAccessToken() {
+  const refreshToken = localStorage.getItem("refresh_token");
+  if (!refreshToken) {
+    window.location.href = "/login";
+    return false;
+  }
+  const res = await fetch(`${API_BASE_URL}/api/token/refresh/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ refresh: refreshToken }),
+  });
+  if (!res.ok) {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    window.location.href = "/login";
+    return false;
+  }
+  const data = await res.json();
+  localStorage.setItem("access_token", data.access);
+  return true;
+}
+
 export async function apiGet(path) {
   const res = await fetch(`${API_BASE_URL}${path}`, {
     headers: { Accept: "application/json" },
@@ -35,6 +57,10 @@ export async function apiPostAuth(path, body) {
     },
     body: JSON.stringify(body),
   });
+  if (res.status === 401) {
+    const refreshed = await refreshAccessToken();
+    if (refreshed) return apiPostAuth(path, body);
+  }
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`POST ${path} failed: ${res.status} ${text}`);
@@ -47,6 +73,10 @@ export async function apiGetAuth(path) {
   const res = await fetch(`${API_BASE_URL}${path}`, {
     headers: { Accept: "application/json", Authorization: `Bearer ${token}` },
   });
+  if (res.status === 401) {
+    const refreshed = await refreshAccessToken();
+    if (refreshed) return apiGetAuth(path);
+  }
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`GET ${path} failed: ${res.status} ${text}`);
@@ -61,6 +91,10 @@ export async function apiPatchAuth(path, body) {
     headers: { "Content-Type": "application/json", Accept: "application/json", Authorization: `Bearer ${token}` },
     body: JSON.stringify(body),
   });
+  if (res.status === 401) {
+    const refreshed = await refreshAccessToken();
+    if (refreshed) return apiPatchAuth(path, body);
+  }
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`PATCH ${path} failed: ${res.status} ${text}`);
@@ -74,6 +108,10 @@ export async function apiDeleteAuth(path) {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
   });
+  if (res.status === 401) {
+    const refreshed = await refreshAccessToken();
+    if (refreshed) return apiDeleteAuth(path);
+  }
   if (!res.ok) {
     const text = await res.text();
     throw new Error(`DELETE ${path} failed: ${res.status} ${text}`);
